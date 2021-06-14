@@ -25,7 +25,7 @@ export class PagesTreeDataProvider
     this.context = context;
   }
 
-  getIconPath(type: string) {
+  private getIconPath(type: string) {
     return {
       light: this.context.asAbsolutePath(
         path.join("resources", "light", `${type.toLowerCase()}.svg`)
@@ -35,8 +35,6 @@ export class PagesTreeDataProvider
       ),
     };
   }
-
-  // ,
 
   async getChildren(element: { key: string }) {
     return getChildren(element?.key).map((key) => getNode(key));
@@ -75,20 +73,40 @@ function getTreeItem(
         title: "Copy",
         command: "g2plot.component.copy",
         tooltip: "Copy plot component",
-        arguments: [{ type: key, schema: plot.schema }],
+        arguments: [plot],
       },
     };
   }
   return {};
 }
 
+type PlotInfo = typeof PLOTS[0];
+ 
 export class AssetsProvider {
+  context: vscode.ExtensionContext;
+
   constructor(context: vscode.ExtensionContext) {
+    this.context = context;
     const pagesTreeDataProvider = new PagesTreeDataProvider(context);
     context.subscriptions.push(
       vscode.window.createTreeView("g2plotAssetView", {
         treeDataProvider: pagesTreeDataProvider,
-      })
+      }),
+      vscode.commands.registerCommand(
+        "g2plot.component.copy",
+        async (uri: PlotInfo) => {
+          if (typeof uri?.type === "string") {
+            vscode.window.showInformationMessage(`Copy ${uri.type}`);
+            await vscode.env.clipboard.writeText(`
+              import { ${uri.name} } from '@ant-design/charts';\n
+              const Page = () => {
+                const config=${uri.schema}; \n
+                return (<${uri.name} {...config} />)
+              }
+            `);
+          }
+        }
+      ),
     );
   }
 }

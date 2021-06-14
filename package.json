@@ -1,8 +1,11 @@
 {
-  "name": "g2plot-vscode-extension",
+  "name": "vsc-g2plot",
   "displayName": "g2plot-vscode-extension",
-  "description": "VSCode extension for G2plot",
+  "description": "vscode extension for G2Plot",
   "version": "0.0.1",
+  "author": {
+    "name": "visiky"
+  },
   "engines": {
     "vscode": "^1.57.0"
   },
