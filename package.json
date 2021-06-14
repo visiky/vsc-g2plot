@@ -1,7 +1,7 @@
 {
-  "name": "g2plot-vscode-extension",
+  "name": "vsc-g2plot",
   "displayName": "g2plot-vscode-extension",
-  "description": "VSCode extension for G2plot",
+  "description": "vscode extension for G2Plot",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.57.0"
@@ -14,12 +14,28 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [],
+    "commands": [
+      {
+        "command": "g2plot.assets.add",
+        "when": "editorLangId =~ /^typescriptreact$|^javascriptreact$/",
+        "title": "G2Plot: 资产添加到此处",
+        "group": "G2Plot"
+      }
+    ],
     "views": {
       "explorer": [
         {
           "id": "g2plotAssetView",
           "name": "G2Plot 资产"
+        }
+      ]
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "g2plot.assets.add",
+          "when": "editorLangId =~ /^typescriptreact$|^javascriptreact$/",
+          "group": "navigation@0"
         }
       ]
     }
