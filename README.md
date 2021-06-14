@@ -1,6 +1,6 @@
 # vsc-g2plot
 
-This is a vscode extension for [Ant Design Charts](https://charts.ant.design/), which is a React chart library based on [G2Plot](https://g2plot.antv.vision), suppoted by [AntV Team](https://antv.vision). 
+This is a vscode extension for [Ant Design Charts](https://charts.ant.design/), which is a React chart library based on [G2Plot](https://g2plot.antv.vision), supported by [AntV Team](https://antv.vision). 
 
 ## Features
 
